@@ -3,8 +3,28 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient,InMemoryCache,ApolloProvider, useQuery,gql } from '@apollo/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const client = ApolloClient({
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  caches: new InMemoryCache()
+})
+
+//const client
+client
+.query({
+  query: gql`
+    query GetRates {
+      rates(currency: "USD") {
+        currency
+      }
+  }
+  `
+})
+.then(result => console.log(result))
+
+
 root.render(
   <React.StrictMode>
     <App />
